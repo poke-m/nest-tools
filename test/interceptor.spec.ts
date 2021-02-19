@@ -28,6 +28,19 @@ class DemoController {
     req.user = { ip, page };
     return user;
   }
+
+  @Get('xml')
+  @HttpCode(HttpStatus.OK)
+  async xml(@Req() req) {
+    req.headers['content-type'] = 'application/xml';
+    return 'xml';
+  }
+
+  @Get('data')
+  @HttpCode(HttpStatus.OK)
+  async data(@Req() req, @GetIP() ip, @GetPage() page, @GetUser() user) {
+    return { data: 1, code: 1, errorCode: 1, message: 1, timestamp: 1 };
+  }
 }
 
 @Module({
@@ -52,7 +65,21 @@ test('Interceptor', async () => {
   const response2 = await axios('http://localhost:3002/user');
   expect(response2.data.data.name === 'mock').toBe(true);
 
-  await axios('http://localhost:3002/test?pagination=');
+  const response3 = await axios('http://localhost:3002/data');
+  expect(response3.data.code === 1).toBe(true);
+  expect(response3.data.data === 1).toBe(true);
 
+  const response4 = await axios('http://localhost:3002/xml');
+  expect(response4.data === 'xml').toBe(true);
+
+  const pagination = {
+    page: 1,
+    pageSize: 10,
+    order: 'id DESC',
+  };
+
+  await axios('http://localhost:3002/test?pagination=' + JSON.stringify(pagination));
+
+  await axios('http://localhost:3002/test?pagination=1');
   app.close();
 });

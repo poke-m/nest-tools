@@ -5,7 +5,7 @@ import { httpStatusOptions, HttpStatusOptions, NestLogger, ResponseEntity } from
 import { getIpByRequest } from '../ip';
 
 @Catch()
-export class CatchError implements ExceptionFilter {
+export class RequestError implements ExceptionFilter {
 
   constructor(
     readonly logger: NestLogger,

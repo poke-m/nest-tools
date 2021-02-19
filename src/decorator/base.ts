@@ -11,9 +11,11 @@ import { getIpByRequest } from '../ip';
  */
 export const CatchError = (message: string, code: number) => {
   return (target: any, methodName: string, desc: PropertyDescriptor) => {
+    const method = target[methodName];
+
     desc.value = async function(...args: any[]) {
       try {
-        const method = target[methodName].bind(this);
+        method.bind(this);
         const result = await method(...args);
         return result;
       } catch (error) {
@@ -57,14 +59,11 @@ export const GetPage = createParamDecorator(
     };
 
     if (request.query && request.query.pagination) {
-      try {
-        const { page, pageSize, order } = JSON.parse(request.query.pagination as string);
-        if (page) pagination.page = page;
-        if (order) pagination.order = order;
-        if (pageSize) pagination.pageSize = pageSize;
-      } catch (error) {
-        console.log('GetPage Error: request.query.pagination' + error);
-      }
+      const { page, pageSize, order } = JSON.parse(request.query.pagination as string);
+
+      if (page) pagination.page = page;
+      if (order) pagination.order = order;
+      if (pageSize) pagination.pageSize = pageSize;
     }
 
     return pagination;

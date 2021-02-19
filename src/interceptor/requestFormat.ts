@@ -29,7 +29,7 @@ export class RequestFormat implements NestInterceptor {
       map((responseData: ResponseEntity<any>) => {
         const request: Request = ctx.switchToHttp().getRequest();
         const response: Response = ctx.switchToHttp().getResponse();
-        const requestId = (request.headers['x-request-id'] as string) || null;
+        const requestId = (request.headers['x-request-id'] as string);
         const contentType = request.headers['content-type'] || 'application/json; charset=utf-8';
 
         if (
