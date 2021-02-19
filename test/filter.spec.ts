@@ -52,6 +52,10 @@ class CoreModule {}
 test('Filter.CatchError', async () => {
   const logger = new NestLogger();
 
+  logger.debug('debug');
+  logger.warn('warn');
+  logger.log('log');
+
   const app = await NestFactory.create(CoreModule, { logger: false });
   app.useGlobalFilters(new Filter.CatchError(logger));
   app.useGlobalPipes(new Pipe.ValidateDto());

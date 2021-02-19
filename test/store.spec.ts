@@ -8,8 +8,8 @@ test('Store', async () => {
 
   const libStore = Store.createStore<Keys>();
 
-  libStore.set('obj1', { name: '1' });
-  libStore.set('obj2', { name: '2' });
+  libStore.set<Obj>('obj1', { name: '1' });
+  libStore.set<Obj>('obj2', { name: '2' });
 
   expect(libStore.get<Obj>('obj1').name === '1').toBe(true);
   expect(libStore.get<Obj>('obj2').name === '2').toBe(true);
