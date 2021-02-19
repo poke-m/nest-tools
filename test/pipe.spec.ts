@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NestFactory } from '@nestjs/core';
-import { IsNotEmpty, IsString } from 'class-validator';
 import { expect, test } from '@jest/globals';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Get, HttpCode, HttpStatus, Req, Query, Module, Controller } from '@nestjs/common';
 
 import { GetPage, Pipe } from '../src';

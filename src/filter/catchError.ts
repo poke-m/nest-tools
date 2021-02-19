@@ -47,33 +47,22 @@ export class CatchError implements ExceptionFilter {
     const request: Request = ctx.getRequest();
     const response: Response = ctx.getResponse();
     const requestId = (request.headers['x-request-id'] as string);
+    const code = exception instanceof HttpException ? exception.getStatus() : 400;
+    const status = this.options.status.get(code);
 
-    if (exception) {
-      let message = '';
-      let errorCode = '';
-      let code = exception instanceof HttpException ? exception.getStatus() : 400;
+    const errorResponse = {
+      requestId,
+      data: null,
+      code: status.code,
+      errorCode: status.errorCode,
+      message: exception.message || status[this.options.language],
+      timestamp: Date.now(),
+    };
 
-      if (this.options.status.has(code)) {
-        const status = this.options.status.get(code);
-        code = status.code;
-        errorCode = status.errorCode;
-        message = exception.message || status[this.options.language];
-      }
+    this.log(errorResponse, request, requestId);
 
-      const errorResponse = {
-        code,
-        errorCode,
-        message,
-        requestId,
-        data: null,
-        timestamp: Date.now(),
-      };
-
-      this.log(errorResponse, request, requestId);
-
-      response.status(200);
-      response.header('Content-Type', 'application/json; charset=utf-8');
-      response.send(errorResponse);
-    }
+    response.status(200);
+    response.header('Content-Type', 'application/json; charset=utf-8');
+    response.send(errorResponse);
   }
 }

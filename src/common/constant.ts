@@ -1,8 +1,14 @@
 import { HttpStatusOptions } from './interface';
 
 export const httpStatusOptions: HttpStatusOptions = {
+  /**
+   * default language
+   */
   language: 'en',
 
+  /**
+   * default status
+   */
   status: new Map([
     [
       200,
