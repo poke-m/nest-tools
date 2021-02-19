@@ -1,3 +1,3 @@
 # Nest-tools
 
-> 🚀 to provide the best components for nest.js server-side development
+> 🚍 to provide the best components for nest.js server-side development

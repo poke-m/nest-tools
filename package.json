@@ -5,7 +5,7 @@
 	"license": "BSD-2-Clause",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"description": "🚀 to provide the best components for nest.js server-side development",
+	"description": "🚍 to provide the best components for nest.js server-side development",
 	"keywords": [
 		"nestjs",
 		"nest",
