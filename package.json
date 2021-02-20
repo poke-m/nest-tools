@@ -1,6 +1,6 @@
 {
 	"name": "@sophons/nest-tools",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"author": "chogath",
 	"license": "BSD-2-Clause",
 	"main": "dist/index.js",
