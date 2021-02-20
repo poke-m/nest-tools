@@ -53,6 +53,9 @@ class CoreModule {}
 test('Interceptor', async () => {
   const logger = new NestLogger();
 
+  logger.info('info');
+  logger.error('info');
+
   const app = await NestFactory.create(CoreModule, { logger: false });
   app.useGlobalInterceptors(new Interceptor.RequestId(logger));
   app.useGlobalInterceptors(new Interceptor.RequestLog(logger));
