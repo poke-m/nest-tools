@@ -23,7 +23,8 @@
 		"build": "tsc",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
-		"lint": "eslint \"{src,test}/**/*.ts\""
+		"lint": "eslint \"{src,test}/**/*.ts\"",
+		"update": "npm version patch && npm publish --access public"
 	},
 	"jest": {
 		"testEnvironment": "node",
