@@ -1,5 +1,6 @@
 # build
 tsconfig.json
+coverage
 
 # src
 src
