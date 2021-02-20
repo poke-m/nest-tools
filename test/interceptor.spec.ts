@@ -38,7 +38,7 @@ class DemoController {
 
   @Get('data')
   @HttpCode(HttpStatus.OK)
-  async data(@Req() req, @GetIP() ip, @GetPage() page, @GetUser() user) {
+  async data() {
     return { data: 1, code: 1, errorCode: 1, message: 1, timestamp: 1 };
   }
 }

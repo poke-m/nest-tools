@@ -2,6 +2,9 @@
 tsconfig.json
 coverage
 
+# eslint
+.eslintrc.*
+
 # src
 src
 test
