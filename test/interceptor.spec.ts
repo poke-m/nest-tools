@@ -22,6 +22,12 @@ class DemoController {
     return req.user;
   }
 
+  @Get('testCreate')
+  @HttpCode(204)
+  async testCreate() {
+    return '';
+  }
+
   @Get('test')
   @HttpCode(HttpStatus.OK)
   async test(@Req() req, @GetIP() ip, @GetPage() page, @GetUser() user) {
@@ -69,11 +75,20 @@ test('Interceptor', async () => {
   expect(response2.data.data.name === 'mock').toBe(true);
 
   const response3 = await axios('http://localhost:3002/data');
-  expect(response3.data.code === 1).toBe(true);
-  expect(response3.data.data === 1).toBe(true);
+  expect(response3.data.data.code === 1).toBe(true);
+  expect(response3.data.data.data === 1).toBe(true);
 
   const response4 = await axios('http://localhost:3002/xml');
   expect(response4.data === 'xml').toBe(true);
+
+  try {
+    const response = await axios('http://localhost:3002/testCreate');
+    expect(response.status === 204).toBe(true);
+    expect(response.data === '').toBe(true);
+  } catch (error) {
+    console.error(error);
+  }
+
 
   const pagination = {
     page: 1,

@@ -15,8 +15,8 @@ export class RequestFormat implements NestInterceptor {
 
     return {
       requestId,
-      code: status.code,
-      errorCode: status.errorCode,
+      code: status.code || response.statusCode,
+      errorCode: status.errorCode || '',
       message: status[this.options.language],
       timestamp: Date.now(),
       data: data || null,
@@ -32,18 +32,13 @@ export class RequestFormat implements NestInterceptor {
         const requestId = (request.headers['x-request-id'] as string);
         const contentType = request.headers['content-type'] || 'application/json; charset=utf-8';
 
+        /**
+         * only deal json & x-www-form-urlencoded
+         */
         if (
           contentType.includes('application/json') ||
           contentType.includes('application/x-www-form-urlencoded')
         ) {
-          if (responseData) {
-            const { data, code, errorCode, message, timestamp } = responseData;
-
-            return data && code && errorCode && message && timestamp
-              ? { requestId, data, code, errorCode, message, timestamp }
-              : this.format(responseData, response, requestId);
-          }
-
           return this.format(responseData, response, requestId);
         }
 
