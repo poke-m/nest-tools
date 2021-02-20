@@ -13,7 +13,7 @@
 	],
 	"homepage": "https://github.com/sophons-space/nest-tools#readme",
 	"bugs": {
-		"url": "https://github.com/sophons-space/nest-toolsissues"
+		"url": "https://github.com/sophons-space/nest-tools/issues"
 	},
 	"repository": {
 		"type": "git",
