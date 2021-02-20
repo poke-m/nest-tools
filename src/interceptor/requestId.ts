@@ -13,13 +13,11 @@ export class RequestId implements NestInterceptor {
 
   intercept(ctx: ExecutionContext, next: CallHandler): Observable<any> {
     const request: Request = ctx.switchToHttp().getRequest();
-
     const ip = getIpByRequest(request);
     const { originalUrl, method, headers } = request;
     headers['x-request-id'] = headers['x-request-id'] || uuid();
 
     this.logger.info(`[${method}] ${originalUrl} [x-request-id] : ${headers['x-request-id']}`, ip);
-
     return next.handle().pipe((responseData: any) => responseData);
   }
 

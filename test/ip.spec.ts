@@ -4,6 +4,7 @@ import { validationIp, getIpByRequest } from '../src';
 
 test('validationIp', async () => {
   expect(validationIp('')).toBe(false);
+  expect(validationIp('::1')).toBe(true);
   expect(validationIp('2001:3CA1:010F:001A:121B:0000:0000:0010')).toBe(true);
 });
 

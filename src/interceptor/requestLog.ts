@@ -28,12 +28,10 @@ export class RequestLog implements NestInterceptor {
         info += `[Request] [Query]   ${JSON.stringify(query)} \n`;
         info += `[Request] [Body]    ${JSON.stringify(body)} \n`;
         info += `[Request] [Headers] ${JSON.stringify(headers)} \n`;
-        info += `[Response] [Detail]  ${JSON.stringify(responseData)} \n`;
+        info += `[Response] [Detail]  ${JSON.stringify(responseData)}`;
 
         if (request['user']) info += `[Request] [User] ${JSON.stringify(request['user'])}`;
-
         this.logger.info(info, ip);
-
         return responseData;
       }),
     );

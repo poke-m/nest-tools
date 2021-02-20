@@ -29,7 +29,7 @@ export class RequestError implements ExceptionFilter {
     info += `[Request] [Query] ${JSON.stringify(query)} \n`;
     info += `[Request] [Body] ${JSON.stringify(body)} \n`;
     info += `[Request] [Headers] ${JSON.stringify(headers)} \n`;
-    info += `[Response] [Detail] ${JSON.stringify(errorResponse)} \n`;
+    info += `[Response] [Detail] ${JSON.stringify(errorResponse)}`;
 
     if (request['user']) info += `[Request] [User] ${JSON.stringify(request['user'])}`;
 
