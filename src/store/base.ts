@@ -1,21 +1,21 @@
 /**
  * Global store
  */
-export const createStore = <KEY>() => {
+export const createStore = <Instance>() => {
   /**
    * Access the instance object using the map structure
    */
-  const store: Map<KEY, any> = new Map();
+  const store: Map<keyof Instance, Instance[keyof Instance]> = new Map();
 
   /**
    * Access in store
    */
   return {
-    get: <T>(key: KEY): T => {
+    get: (key: keyof Instance): Instance[keyof Instance] => {
       return store.get(key);
     },
 
-    set: <T>(key: KEY, value: T): void => {
+    set: (key: keyof Instance, value: Instance[keyof Instance]): void => {
       store.set(key, value);
     },
   };
