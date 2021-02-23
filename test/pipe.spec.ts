@@ -4,7 +4,7 @@ import { expect, test } from '@jest/globals';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { Get, HttpCode, HttpStatus, Req, Query, Module, Controller } from '@nestjs/common';
 
-import { GetPage, Pipe } from '../src';
+import { GetPage, HealthModule, Pipe } from '../src';
 
 class DemoDto {
   @IsString()
@@ -24,6 +24,7 @@ class DemoController {
 }
 
 @Module({
+  imports: [HealthModule],
   controllers: [
     DemoController,
   ],
@@ -34,6 +35,13 @@ test('Pipe.ValidateDto', async () => {
   const app = await NestFactory.create(CoreModule, { logger: false });
   app.useGlobalPipes(new Pipe.ValidateDto());
   await app.listen(3000);
+
+  try {
+    const response = await axios('http://localhost:3000/');
+    expect(response.status === 200).toBe(true);
+  } catch (error) {
+    console.error(error);
+  }
 
   try {
     await axios('http://localhost:3000/dto');
